@@ -1,5 +1,5 @@
 export const RegisterPage = () => {
     return (
-        <div>RegisterPage</div>
+        <div>Register Page</div>
     );
 }

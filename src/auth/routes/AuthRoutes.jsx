@@ -1,14 +1,19 @@
-import { Navigate, Route, Routes } from "react-router-dom"
+import { Navigate, Route, Routes} from "react-router-dom"
+import { AuthNav } from "../components/AuthNav"
 import { LoginPage } from "../pages/LoginPage"
 import { RegisterPage } from "../pages/RegisterPage"
 
 export const AuthRoutes = () =>{
     return (
-        <Routes>
-            <Route path="login" element={<LoginPage />}/>
-            <Route path="register" element={<RegisterPage />}/>
-        
-            <Route path="/*" element={<Navigate to="login" />}/>
-        </Routes>
+        <div style={{width: '40%'}} className="container">
+            <AuthNav />
+
+            <Routes>
+                <Route path="/login" element={<LoginPage />}/>
+                <Route path="/register" element={<RegisterPage />}/>
+            
+                <Route path="/*" element={<Navigate to="login" />}/>
+            </Routes>
+        </div>
     )
 }
