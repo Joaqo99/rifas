@@ -1,0 +1,9 @@
+.contenedor{
+    width: 70%;
+}
+
+@media (min-width: 860px){
+    .contenedor{
+        width: 40%;
+    }
+}

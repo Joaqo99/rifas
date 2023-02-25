@@ -1,3 +1,13 @@
-.linkk{
-    color: green !important;
+.linkk:hover{
+    border: 2px solid #24da48 !important;
+}
+
+@media (max-width: 500px) {
+    .linkk:hover{
+        border: 2px solid transparent !important;
+    }
+
+    .linkk:active{
+        border: 2px solid #24da48 !important;
+    }
 }

@@ -3,9 +3,11 @@ import { AuthNav } from "../components/AuthNav"
 import { LoginPage } from "../pages/LoginPage"
 import { RegisterPage } from "../pages/RegisterPage"
 
+import './AuthRoutesStyles.css'
+
 export const AuthRoutes = () =>{
     return (
-        <div style={{width: '40%'}} className="container">
+        <div className="container contenedor">
             <AuthNav />
 
             <Routes>
