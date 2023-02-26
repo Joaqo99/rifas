@@ -1,0 +1,13 @@
+.icon-button:hover{
+    color: #000617 !important;
+    background-color: #24da48 !important;
+}
+
+.register-button:hover{
+    border: 2px solid #24da48 !important;
+}
+
+.register-button:active{
+    background-color: #24da48 !important;
+    color: #000617 !important;
+}

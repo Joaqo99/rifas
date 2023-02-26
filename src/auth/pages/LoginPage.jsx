@@ -1,13 +1,5 @@
 import './LoginPageStyles.css';
 
-
-const inputStyle = {
-    backgroundColor: 'transparent',
-    border: 'none',
-    borderRadius: '0px',
-    borderBottom: 'solid 1px #ccc',
-};
-
 const iconButtonStyle = {
     width: '50px',
     height: '50px',
@@ -39,10 +31,10 @@ export const LoginPage = () => {
                 </div>
                 <p className="text-center">o con:</p>
                 <div className="form-outline mb-4">
-                    <input style={inputStyle} type="email" id="loginName" className="form-control input mb-5" placeholder="Email" />
+                    <input type="email" id="loginName" className="form-control" placeholder="Email" />
                 </div>
                 <div className="form-outline mb-4">
-                    <input style={inputStyle} type="password" id="loginPassword" className="form-control input mb-5" placeholder="Contraseña"/>
+                    <input type="password" id="loginPassword" className="form-control" placeholder="Contraseña"/>
                 </div>
                 <div className="row mb-4">
                     <div className="col-md-6 d-flex justify-content-center">

@@ -1,75 +1,59 @@
+import './RegisterPageStyles.css'
+
+const iconButtonStyle = {
+  width: '50px',
+  height: '50px',
+  color: '#24da48',
+  borderRadius: '50%'
+};
+
+const buttonStyle = {
+  width: '100%',
+  height: '45px',
+  color: '#24da48',
+  backgroundColor: 'transparent',
+  border: '2px solid transparent',
+}
+
 export const RegisterPage = () => {
     return (
-        <>
-            <div>Register page</div>
-        {/*<div className="tab-content">
-            <div class="tab-pane fade" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
-              <form>
-                <div class="text-center mb-3">
-                  <p>Sign up with:</p>
-                  <button type="button" class="btn btn-link btn-floating mx-1">
-                    <i class="fab fa-facebook-f"></i>
-                  </button>
-
-                  <button type="button" class="btn btn-link btn-floating mx-1">
-                    <i class="fab fa-google"></i>
-                  </button>
-
-                  <button type="button" class="btn btn-link btn-floating mx-1">
-                    <i class="fab fa-twitter"></i>
-                  </button>
-
-                  <button type="button" class="btn btn-link btn-floating mx-1">
-                    <i class="fab fa-github"></i>
-                  </button>
-                </div>
-
-                <p class="text-center">or:</p>
-
-                <!-- Name input -->
-                <div class="form-outline mb-4">
-                  <input type="text" id="registerName" class="form-control" />
-                  <label class="form-label" for="registerName">Name</label>
-                </div>
-
-                <!-- Username input -->
-                <div class="form-outline mb-4">
-                  <input type="text" id="registerUsername" class="form-control" />
-                  <label class="form-label" for="registerUsername">Username</label>
-                </div>
-
-                <!-- Email input -->
-                <div class="form-outline mb-4">
-                  <input type="email" id="registerEmail" class="form-control" />
-                  <label class="form-label" for="registerEmail">Email</label>
-                </div>
-
-                <!-- Password input -->
-                <div class="form-outline mb-4">
-                  <input type="password" id="registerPassword" class="form-control" />
-                  <label class="form-label" for="registerPassword">Password</label>
-                </div>
-
-                <!-- Repeat Password input -->
-                <div class="form-outline mb-4">
-                  <input type="password" id="registerRepeatPassword" class="form-control" />
-                  <label class="form-label" for="registerRepeatPassword">Repeat password</label>
-                </div>
-
-                <!-- Checkbox -->
-                <div class="form-check d-flex justify-content-center mb-4">
-                  <input class="form-check-input me-2" type="checkbox" value="" id="registerCheck" checked
-                    aria-describedby="registerCheckHelpText" />
-                  <label class="form-check-label" for="registerCheck">
-                    I have read and agree to the terms
-                  </label>
-                </div>
-
-                <!-- Submit button -->
-                <button type="submit" class="btn btn-primary btn-block mb-3">Sign in</button>
-              </form>
-            </div>
-    </div>*/}
-    </>
+      <div className="tab-content">
+          <div className="tab-pane fade show active" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
+            <form>
+              <div className="text-center mb-3">
+                <p>Registrarse con:</p>
+                <button style={iconButtonStyle} type="button" className="btn btn-link btn-floating mx-2 icon-button">
+                  <i className="fab fa-facebook-f"></i>
+                </button>
+                <button style={iconButtonStyle} type="button" className="btn btn-link btn-floating mx-2 icon-button">
+                  <i className="fab fa-google"></i>
+                </button>
+              </div>
+              <p className="text-center">o con:</p>
+              <div className="form-outline mb-4">
+                <input type="text" id="registerName" className="form-control" placeholder='Nombre'/>
+              </div>
+              <div className="form-outline mb-4">
+                <input type="text" id="registerUsername" className="form-control" placeholder='Nombre de usuario'/>
+              </div>
+              <div className="form-outline mb-4">
+                <input type="email" id="registerEmail" className="form-control" placeholder='Email'/>
+              </div>
+              <div className="form-outline mb-4">
+                <input type="password" id="registerPassword" className="form-control" placeholder='Contraseña'/>
+              </div>
+              <div className="form-outline mb-4">
+                <input type="password" id="registerRepeatPassword" className="form-control" placeholder='Confirmar contraseña'/>
+              </div>
+              <div className="form-check d-flex justify-content-center mb-4">
+                <input className="form-check-input me-2" type="checkbox" value="" id="registerCheck" aria-describedby="registerCheckHelpText" />
+                <label className="form-check-label" forhtml="registerCheck">
+                  Leí y acepto los términos y condiciones
+                </label>
+              </div>
+              <button style={buttonStyle} type="submit" className="btn btn-primary btn-block mb-3 register-button">Registrarse</button>
+            </form>
+          </div>
+        </div>
     );
 }
