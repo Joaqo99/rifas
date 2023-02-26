@@ -19,7 +19,7 @@ export const AuthNav = () => {
 
     return ( 
         <div className='mt-5'>
-            <ul className="nav nav-pills nav-fill mb-1 justify-content-between text-center" id="ex1" role="tablist">
+            <ul className="nav nav-pills nav-fill mb-2 justify-content-between text-center" id="ex1" role="tablist">
                 <li style={liStyles} className="nav-item m-2" role="presentation">
                     <NavLink 
                         style={ ({isActive}) => linkStyles(isActive)} 

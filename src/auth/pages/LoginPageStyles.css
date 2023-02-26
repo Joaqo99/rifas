@@ -1,0 +1,17 @@
+.icon-button:hover{
+    color: #000617 !important;
+    background-color: #24da48 !important;
+}
+
+.login-button:hover{
+    border: 2px solid #24da48 !important;
+}
+
+.login-button:active{
+    background-color: #24da48 !important;
+    color: #000617 !important;
+}
+
+.input::placeholder{
+    color: #ccc !important;
+}
