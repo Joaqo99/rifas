@@ -1,3 +1,6 @@
+import { useDispatch } from 'react-redux';
+import { useForm } from '../../hooks/useForm';
+import { checkingAuthentication, startFacebookLogin, startGoogleLogin } from '../../store/auth/thunks';
 import './LoginPageStyles.css';
 
 const iconButtonStyle = {
@@ -17,24 +20,67 @@ const buttonStyle = {
 
 
 export const LoginPage = () => {
+
+    const dispatch = useDispatch();
+
+    const {email, password, onInputChange} = useForm({
+        email: 'joaqo@gmail.com',
+        password: '123456'
+    });
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+
+        console.log({email, password});
+        dispatch(checkingAuthentication());
+    };
+
+    const onGoogleLogin = () => {
+        console.log('onGoogleLogin');
+        dispatch(startGoogleLogin());
+        
+    };
+
+    const onFacebookLogin = () => {
+        console.log('onFacebookLogin');
+        dispatch(startFacebookLogin());
+    };
+
+
     return (
         <div className="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
-            <form>
+            <form onSubmit={onSubmit}>
                 <div className="text-center mb-3">
                     <p>Ingresar con:</p>
-                    <button style={iconButtonStyle} type="button" className="btn btn-link btn-floating mx-2 icon-button">
+                    <button onClick={onFacebookLogin} style={iconButtonStyle} type="button" className="btn btn-link btn-floating mx-2 icon-button">
                         <i className="fab fa-facebook-f"></i>
                     </button>
-                    <button style={iconButtonStyle} type="button" className="btn btn-link btn-floating mx-2 icon-button">
+                    <button onClick={onGoogleLogin} style={iconButtonStyle} type="button" className="btn btn-link btn-floating mx-2 icon-button">
                         <i className="fab fa-google"></i>
                     </button>
                 </div>
                 <p className="text-center">o con:</p>
                 <div className="form-outline mb-4">
-                    <input type="email" id="loginName" className="form-control" placeholder="Email" />
+                    <input 
+                        type="email" 
+                        id="loginName" 
+                        className="form-control" 
+                        placeholder="Email"
+                        name='email'
+                        value={email}
+                        onChange={onInputChange}
+                    />
                 </div>
                 <div className="form-outline mb-4">
-                    <input type="password" id="loginPassword" className="form-control" placeholder="Contraseña"/>
+                    <input 
+                        type="password"
+                        id="loginPassword" 
+                        className="form-control" 
+                        placeholder="Contraseña"
+                        name='password'
+                        value={password}
+                        onChange={onInputChange}
+                    />
                 </div>
                 <div className="row mb-4">
                     <div className="col-md-6 d-flex justify-content-center">
