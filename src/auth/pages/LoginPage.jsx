@@ -46,7 +46,6 @@ export const LoginPage = () => {
     };
 
     const onFacebookLogin = () => {
-        console.log('onFacebookLogin');
         dispatch(startFacebookLogin());
     };
 
