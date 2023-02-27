@@ -1,4 +1,5 @@
-import { useDispatch } from 'react-redux';
+import { useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from '../../hooks/useForm';
 import { checkingAuthentication, startFacebookLogin, startGoogleLogin } from '../../store/auth/thunks';
 import './LoginPageStyles.css';
@@ -21,6 +22,10 @@ const buttonStyle = {
 
 export const LoginPage = () => {
 
+    const {status} = useSelector(state => state.auth);
+
+    const isAuthenticating = useMemo(()=> status === 'checking', [status])
+
     const dispatch = useDispatch();
 
     const {email, password, onInputChange} = useForm({
@@ -36,7 +41,6 @@ export const LoginPage = () => {
     };
 
     const onGoogleLogin = () => {
-        console.log('onGoogleLogin');
         dispatch(startGoogleLogin());
         
     };
@@ -52,10 +56,10 @@ export const LoginPage = () => {
             <form onSubmit={onSubmit}>
                 <div className="text-center mb-3">
                     <p>Ingresar con:</p>
-                    <button onClick={onFacebookLogin} style={iconButtonStyle} type="button" className="btn btn-link btn-floating mx-2 icon-button">
+                    <button disabled={isAuthenticating} onClick={onFacebookLogin} style={iconButtonStyle} type="button" className="btn btn-link btn-floating mx-2 icon-button">
                         <i className="fab fa-facebook-f"></i>
                     </button>
-                    <button onClick={onGoogleLogin} style={iconButtonStyle} type="button" className="btn btn-link btn-floating mx-2 icon-button">
+                    <button disabled={isAuthenticating} onClick={onGoogleLogin} style={iconButtonStyle} type="button" className="btn btn-link btn-floating mx-2 icon-button">
                         <i className="fab fa-google"></i>
                     </button>
                 </div>

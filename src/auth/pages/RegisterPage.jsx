@@ -17,19 +17,9 @@ const buttonStyle = {
 
 export const RegisterPage = () => {
     return (
-      <div className="tab-content">
+      <div className="tab-content mt-4">
           <div className="tab-pane fade show active" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
             <form>
-              <div className="text-center mb-3">
-                <p>Registrarse con:</p>
-                <button style={iconButtonStyle} type="button" className="btn btn-link btn-floating mx-2 icon-button">
-                  <i className="fab fa-facebook-f"></i>
-                </button>
-                <button style={iconButtonStyle} type="button" className="btn btn-link btn-floating mx-2 icon-button">
-                  <i className="fab fa-google"></i>
-                </button>
-              </div>
-              <p className="text-center">o con:</p>
               <div className="form-outline mb-4">
                 <input type="text" id="registerName" className="form-control" placeholder='Nombre'/>
               </div>
