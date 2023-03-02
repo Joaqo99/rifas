@@ -1,6 +1,6 @@
+import { useFormik } from 'formik';
 import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useForm } from '../../hooks/useForm';
 import { checkingAuthentication, startFacebookLogin, startGoogleLogin } from '../../store/auth/thunks';
 import './LoginPageStyles.css';
 
@@ -22,23 +22,25 @@ const buttonStyle = {
 
 export const LoginPage = () => {
 
+    const formik = useFormik({
+        initialValues: {
+            email: '',
+            password: '',
+        },
+        onSubmit: values => {
+            dispatch(checkingAuthentication())
+        }
+    })
+
+
+
+
+
     const {status} = useSelector(state => state.auth);
 
     const isAuthenticating = useMemo(()=> status === 'checking', [status])
 
     const dispatch = useDispatch();
-
-    const {email, password, onInputChange} = useForm({
-        email: 'joaqo@gmail.com',
-        password: '123456'
-    });
-
-    const onSubmit = (e) => {
-        e.preventDefault();
-
-        console.log({email, password});
-        dispatch(checkingAuthentication());
-    };
 
     const onGoogleLogin = () => {
         dispatch(startGoogleLogin());
@@ -52,7 +54,7 @@ export const LoginPage = () => {
 
     return (
         <div className="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
-            <form onSubmit={onSubmit}>
+            <form onSubmit={formik.handleSubmit}>
                 <div className="text-center mb-3">
                     <p>Ingresar con:</p>
                     <button disabled={isAuthenticating} onClick={onFacebookLogin} style={iconButtonStyle} type="button" className="btn btn-link btn-floating mx-2 icon-button">
@@ -66,23 +68,23 @@ export const LoginPage = () => {
                 <div className="form-outline mb-4">
                     <input 
                         type="email" 
-                        id="loginName" 
+                        id="email" 
                         className="form-control" 
                         placeholder="Email"
                         name='email'
-                        value={email}
-                        onChange={onInputChange}
+                        onChange={formik.handleChange}
+                        value={formik.values.email}
                     />
                 </div>
                 <div className="form-outline mb-4">
                     <input 
                         type="password"
-                        id="loginPassword" 
+                        id="password" 
                         className="form-control" 
                         placeholder="Contraseña"
                         name='password'
-                        value={password}
-                        onChange={onInputChange}
+                        onChange={formik.handleChange}
+                        value={formik.values.password}
                     />
                 </div>
                 <div className="row mb-4">
@@ -96,7 +98,7 @@ export const LoginPage = () => {
                         <a href="#!">Olvidó su contraseña?</a>
                     </div>
                 </div>
-                <button type="submit" style={buttonStyle} className="btn btn-block mb-4 login-button mt-4">Ingresar</button>
+                <button disabled={isAuthenticating} type="submit" style={buttonStyle} className="btn btn-block mb-4 login-button mt-4">Ingresar</button>
             </form>
         </div>
     );
