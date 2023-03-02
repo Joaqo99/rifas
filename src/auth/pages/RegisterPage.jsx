@@ -1,4 +1,7 @@
 import { useFormik } from 'formik';
+import { useEffect, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { startCreatingUserWithEmailPassword } from '../../store/auth/thunks';
 import './RegisterPageStyles.css'
 
 const iconButtonStyle = {
@@ -19,7 +22,7 @@ const buttonStyle = {
 const validate = (values)=> {
   let errors = {};
 
-  if(values.email.length < 5 && !values.email.includes("@")){
+  if(values.email.length < 5 && values.email.includes("@")){
     errors.email = 'No es una dirección de correo valida'
   }
 
@@ -54,6 +57,10 @@ const validate = (values)=> {
 
 export const RegisterPage = () => {
 
+  const dispatch = useDispatch()
+  const {status, errorMessage} = useSelector( state => state.auth);
+  const isCheckingAuthentication = useMemo(()=> status === 'checking', [status]);
+
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -65,7 +72,7 @@ export const RegisterPage = () => {
     },
     validate,
     onSubmit: (values) => {
-      console.log(values);
+      dispatch(startCreatingUserWithEmailPassword(values));
     }
   })
 
@@ -79,26 +86,26 @@ export const RegisterPage = () => {
                   type="text" 
                   id="fullName" 
                   name="fullName" 
-                  className={`form-control ${formik.errors.fullName ? "is-invalid" : ""}`}
+                  className={`form-control ${formik.touched.fullName && formik.errors.fullName ? "is-invalid" : ""}`}
                   placeholder='Nombre completo' 
                   value={formik.values.fullName} 
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                 />
-                {formik.errors.fullName ? <div className='invalid-feedback'>{formik.errors.fullName}</div> : null}
+                {formik.touched.fullName && formik.errors.fullName ? <div className='invalid-feedback'>{formik.errors.fullName}</div> : null}
               </div>
 
               <div className="form-outline mb-4">
                 <input 
                   type="text" id="displayName" 
                   name="displayName" 
-                  className={`form-control ${formik.errors.displayName ? "is-invalid" : ""}`}
+                  className={`form-control ${formik.touched.displayName && formik.errors.displayName ? "is-invalid" : ""}`}
                   placeholder='Nombre de usuario' 
                   value={formik.values.displayName} 
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                 />
-                {formik.errors.displayName ? <div className='invalid-feedback'>{formik.errors.displayName}</div> : null}
+                {formik.touched.displayName && formik.errors.displayName ? <div className='invalid-feedback'>{formik.errors.displayName}</div> : null}
               </div>
 
               <div className="form-outline mb-4">
@@ -106,13 +113,13 @@ export const RegisterPage = () => {
                   type="email" 
                   id="email" 
                   name='email' 
-                  className={`form-control ${formik.errors.email ? "is-invalid" : ""}`}
+                  className={`form-control ${formik.touched.email && formik.errors.email ? "is-invalid" : ""}`}
                   placeholder='Email' 
                   value={formik.values.email} 
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                 />
-                {formik.errors.email ? <div className='invalid-feedback'>{formik.errors.email}</div> : null}
+                {formik.touched.email && formik.errors.email ? <div className='invalid-feedback'>{formik.errors.email}</div> : null}
               </div>
 
               <div className="form-outline mb-4">
@@ -120,13 +127,13 @@ export const RegisterPage = () => {
                   type="password" 
                   id="password" 
                   name="password" 
-                  className={`form-control ${formik.errors.password ? "is-invalid" : ""}`}
+                  className={`form-control ${formik.touched.password && formik.errors.password ? "is-invalid" : ""}`}
                   placeholder='Contraseña' 
                   value={formik.values.password} 
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                 />
-                {formik.errors.password ? <div className='invalid-feedback'>{formik.errors.password}</div> : null}
+                {formik.touched.password && formik.errors.password ? <div className='invalid-feedback'>{formik.errors.password}</div> : null}
               </div>
 
               <div className="form-outline mb-4">
@@ -134,18 +141,18 @@ export const RegisterPage = () => {
                   type="password" 
                   id="repeatPassword" 
                   name="repeatPassword" 
-                  className={`form-control ${formik.errors.repeatPassword ? "is-invalid" : ""}`}
+                  className={`form-control ${formik.touched.repeatPassword && formik.errors.repeatPassword ? "is-invalid" : ""}`}
                   placeholder='Confirmar contraseña' 
                   value={formik.values.repeatPassword} 
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                 />
-                {formik.errors.repeatPassword ? <div className='invalid-feedback'>{formik.errors.repeatPassword}</div> : null}
+                {formik.touched.repeatPassword && formik.errors.repeatPassword ? <div className='invalid-feedback'>{formik.errors.repeatPassword}</div> : null}
               </div>
 
               <div className="form-check d-flex justify-content-center mb-4">
                 <input 
-                  className={`form-check-input me-2 ${formik.errors.condicionesAceptadas ? "is-invalid" : ""} `}
+                  className={`form-check-input me-2 ${formik.touched.condicionesAceptadas && formik.errors.condicionesAceptadas ? "is-invalid" : ""} `}
                   type="checkbox" 
                   id="condicionesAceptadas" 
                   name='condicionesAceptadas'
@@ -154,11 +161,22 @@ export const RegisterPage = () => {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                 />
-                {formik.errors.condicionesAceptadas ? <div className='invalid-feedback'>{formik.errors.condicionesAceptadas}</div> :                 <label className="form-check-label" forhtml="registerCheck">
+                {formik.touched.condicionesAceptadas && formik.errors.condicionesAceptadas ? <div className='invalid-feedback'>{formik.errors.condicionesAceptadas}</div> :                 <label className="form-check-label" forhtml="registerCheck">
                   Leí y acepto los términos y condiciones
                 </label>}
               </div>
-              <button style={buttonStyle} type="submit" className="btn btn-primary btn-block mb-3 register-button">Registrarse</button>
+              {errorMessage && <div className="alert alert-danger" role="alert">
+                <i className="fa-solid fa-circle-exclamation"></i>
+                {errorMessage}
+              </div>}
+              <button 
+                style={buttonStyle} 
+                type="submit" 
+                className="btn btn-primary btn-block mb-3 register-button"
+                disabled={isCheckingAuthentication}
+              >
+                Registrarse
+              </button>
             </form>
           </div>
         </div>
