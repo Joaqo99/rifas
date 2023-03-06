@@ -1,15 +1,21 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { AuthRoutes } from "../auth/routes/AuthRoutes";
+import { useCheckAuth } from "../hooks/useCheckAuth";
 import { RifasRoutes } from "../rifas/routes/RifasRoutes";
+import { Spinner } from "../ui/components/Spinner";
 
 export const AppRouter = () => {
 
-    const authStatus = 'not-authenticated';
+    const {status} = useCheckAuth()
+
+    if(status === 'checking'){
+        return (<Spinner />)
+    }
 
     return (
         <Routes>
             {
-                (authStatus === 'not-authenticated')
+                (status === 'not-authenticated')
                 ? <Route path="/auth/*" element={<AuthRoutes />}/>
                 :<Route path="/*" element={<RifasRoutes />}/>
             }

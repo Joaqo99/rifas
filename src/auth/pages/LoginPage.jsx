@@ -1,7 +1,7 @@
 import { useFormik } from 'formik';
 import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { checkingAuthentication, startFacebookLogin, startGoogleLogin } from '../../store/auth/thunks';
+import { checkingAuthentication, startFacebookLogin, startGoogleLogin, startLoginWithEmailPassword } from '../../store/auth/thunks';
 import './LoginPageStyles.css';
 
 const iconButtonStyle = {
@@ -28,7 +28,7 @@ export const LoginPage = () => {
             password: '',
         },
         onSubmit: values => {
-            dispatch(checkingAuthentication())
+            dispatch(startLoginWithEmailPassword(values.email, values.password))
         }
     })
 
